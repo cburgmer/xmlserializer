@@ -1,33 +1,65 @@
 ;(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 var Parser = require('parse5').Parser;
 
+var cdataBlockTags = ['script', 'style'];
+
+var booleanAttrs = ['checked', 'compact', 'declare', 'defer', 'disabled', 'ismap', 'multiple',
+    'nohref', 'noresize', 'noshade', 'nowrap', 'readonly', 'selected'];
+
+var serializeAttribute = function (attr) {
+    var value = attr.value;
+
+    if (booleanAttrs.indexOf(attr.name) >= 0) {
+        value = attr.name;
+    }
+    return ' ' + attr.name + '="' + value + '"';
+};
+
+var serializeNamespace = function (node) {
+    if (node.tagName === 'html') {
+         return ' xmlns="' + node.namespaceURI + '"';
+    } else {
+        return '';
+    }
+};
+
+var serializeChildren = function (node) {
+    return node.childNodes.map(nodeTreeToXHTML).join('');
+};
+
+var serializeTag = function (node) {
+    var output = '<' + node.tagName;
+    output += serializeNamespace(node);
+
+    node.attrs.forEach(function (attr) {
+        output += serializeAttribute(attr);
+    });
+
+    if (node.childNodes.length > 0) {
+        output += '>';
+
+        if (cdataBlockTags.indexOf(node.tagName) >= 0) {
+            output += '<![CDATA[\n';
+            output += serializeChildren(node);
+            output += '\n]]>';
+        } else {
+            output += serializeChildren(node);
+        }
+
+        output += '</' + node.tagName + '>';
+    } else {
+        output += '/>';
+    }
+    return output;
+};
 
 var nodeTreeToXHTML = function (node) {
-    var output;
-
     if (node.nodeName === '#document'
         || node.nodeName === '#document-fragment') {
-        return node.childNodes.map(nodeTreeToXHTML).join('');
+        return serializeChildren(node);
     } else {
         if (node.tagName) {
-            output = '<' + node.tagName;
-            if (node.tagName === 'html') {
-                 output += ' xmlns="' + node.namespaceURI + '"';
-            }
-
-            node.attrs.forEach(function (attr) {
-                output += " " + attr.name + '="' + attr.value + '"';
-            });
-
-
-            if (node.childNodes.length > 0) {
-                output += '>';
-                output += node.childNodes.map(nodeTreeToXHTML).join('');
-                output += '</' + node.tagName + '>';
-            } else {
-                output += '/>';
-            }
-            return output;
+            return serializeTag(node);
         } else if (node.nodeName === '#text') {
             return node.value;
         } else if (node.nodeName === '#comment') {
