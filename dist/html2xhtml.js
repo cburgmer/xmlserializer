@@ -16,7 +16,11 @@ var serializeAttribute = function (attr) {
 };
 
 var serializeNamespace = function (node) {
-    if (node.tagName === 'html') {
+    var nodeHasXmlnsAttr = node.attrs.map(function (attr) {
+            return attr.name;
+        })
+        .indexOf('xmlns') >= 0;
+    if (node.tagName === 'html' && !nodeHasXmlnsAttr) {
          return ' xmlns="' + node.namespaceURI + '"';
     } else {
         return '';

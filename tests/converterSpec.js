@@ -92,4 +92,10 @@ describe('html2xhtml', function () {
 
         expect(xhtml).toEqual(withXHTMLBoilerplate('<input type="checkbox" checked="checked"/>'));
     });
+
+    it('should prefer existing xmlns', function () {
+        var xhtml = html2xhtml('<html xmlns="somenamespace"></html>');
+
+        expect(xhtml).toEqual('<html xmlns="somenamespace"><head/><body/></html>');
+    });
 });
