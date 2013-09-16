@@ -86,4 +86,10 @@ describe('html2xhtml', function () {
         expect(xhtml).toEqual(withXHTMLBoilerplate('',
             '<style><![CDATA[\nspan:before { content: "<"; }\n]]></style>'));
     });
+
+    it('should convert boolean attributes', function () {
+        var xhtml = html2xhtml('<input type="checkbox" checked/>');
+
+        expect(xhtml).toEqual(withXHTMLBoilerplate('<input type="checkbox" checked="checked"/>'));
+    });
 });
