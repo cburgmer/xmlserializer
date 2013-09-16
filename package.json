@@ -1,0 +1,24 @@
+{
+  "name": "html2xhtml",
+  "description": "HTML to XHTML converter",
+  "version": "0.0.1",
+  "author": "Christoph Burgmer",
+  "keywords": [
+    "html",
+    "html5",
+    "xhtml",
+    "converter"
+  ],
+  "main": "./lib/converter.js",
+  "dependencies": {
+    "parse5": "0.6.0"
+  },
+  "devDependencies": {
+    "jasmine-node": "1.11.0"
+  },
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ]
+}
