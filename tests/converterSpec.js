@@ -90,7 +90,7 @@ describe('html2xhtml', function () {
     it('should convert boolean attributes', function () {
         var xhtml = html2xhtml('<input type="checkbox" checked/>');
 
-        expect(xhtml).toEqual(withXHTMLBoilerplate('<input type="checkbox" checked="checked"/>'));
+        expect(xhtml).toEqual(withXHTMLBoilerplate('<input type="checkbox" checked=""/>'));
     });
 
     it('should prefer existing xmlns', function () {

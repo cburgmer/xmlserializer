@@ -3,15 +3,9 @@ var Parser = require('parse5').Parser;
 
 var cdataBlockTags = ['script', 'style'];
 
-var booleanAttrs = ['checked', 'compact', 'declare', 'defer', 'disabled', 'ismap', 'multiple',
-    'nohref', 'noresize', 'noshade', 'nowrap', 'readonly', 'selected'];
-
 var serializeAttribute = function (attr) {
     var value = attr.value;
 
-    if (booleanAttrs.indexOf(attr.name) >= 0) {
-        value = attr.name;
-    }
     return ' ' + attr.name + '="' + value + '"';
 };
 
