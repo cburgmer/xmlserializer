@@ -1,0 +1,8 @@
+{
+  "name": "html2xhtml",
+  "version": "0.1.0",
+  "main": [
+    "./dist/html2xhtml.js",
+  ],
+  "dependencies": {}
+}

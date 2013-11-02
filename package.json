@@ -1,7 +1,7 @@
 {
   "name": "html2xhtml",
   "description": "HTML to XHTML converter",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "author": "Christoph Burgmer",
   "keywords": [
     "html",
