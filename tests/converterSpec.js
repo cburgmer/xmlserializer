@@ -67,6 +67,24 @@ describe('html2xhtml', function () {
         expect(xhtml).toEqual(withXHTMLBoilerplate('–'));
     });
 
+    it('should correctly quote ampersand', function () {
+        var xhtml = html2xhtml('&amp;');
+
+        expect(xhtml).toEqual(withXHTMLBoilerplate('&amp;'));
+    });
+
+    it('should correctly quote lighter than', function () {
+        var xhtml = html2xhtml('&lt;');
+
+        expect(xhtml).toEqual(withXHTMLBoilerplate('&lt;'));
+    });
+
+    it('should correctly quote greater than', function () {
+        var xhtml = html2xhtml('&gt;');
+
+        expect(xhtml).toEqual(withXHTMLBoilerplate('&gt;'));
+    });
+
     it('should serialize to self closing attribute', function () {
         var xhtml = html2xhtml('<br/>');
 
