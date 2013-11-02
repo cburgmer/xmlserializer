@@ -68,21 +68,21 @@ describe('html2xhtml', function () {
     });
 
     it('should correctly quote ampersand', function () {
-        var xhtml = html2xhtml('&amp;');
+        var xhtml = html2xhtml('&amp;&amp;');
 
-        expect(xhtml).toEqual(withXHTMLBoilerplate('&amp;'));
+        expect(xhtml).toEqual(withXHTMLBoilerplate('&amp;&amp;'));
     });
 
     it('should correctly quote lighter than', function () {
-        var xhtml = html2xhtml('&lt;');
+        var xhtml = html2xhtml('&lt;&lt;');
 
-        expect(xhtml).toEqual(withXHTMLBoilerplate('&lt;'));
+        expect(xhtml).toEqual(withXHTMLBoilerplate('&lt;&lt;'));
     });
 
     it('should correctly quote greater than', function () {
-        var xhtml = html2xhtml('&gt;');
+        var xhtml = html2xhtml('&gt;&gt;');
 
-        expect(xhtml).toEqual(withXHTMLBoilerplate('&gt;'));
+        expect(xhtml).toEqual(withXHTMLBoilerplate('&gt;&gt;'));
     });
 
     it('should serialize to self closing attribute', function () {

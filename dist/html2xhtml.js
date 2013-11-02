@@ -56,7 +56,7 @@ var serializeTag = function (node) {
 var serializeText = function (node, wrappedInCDATA) {
     var text = node.value;
     if (!wrappedInCDATA) {
-        text = text.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;');
+        text = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     }
     return text;
 };
