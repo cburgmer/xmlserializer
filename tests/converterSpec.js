@@ -37,6 +37,12 @@ describe('html2xhtml', function () {
         expect(xhtml).toEqual('<!-- this is a comment -->' + emptyDocument());
     });
 
+    it('should correctly serialize special characters in comments', function () {
+        var xhtml = html2xhtml('<!-- --&gt; -->');
+
+        expect(xhtml).toEqual('<!-- --&gt; -->' + emptyDocument());
+    });
+
     it('should serialize attributes', function () {
         var xhtml = html2xhtml('<p class="myClass"> </p>');
 
@@ -83,6 +89,12 @@ describe('html2xhtml', function () {
         var xhtml = html2xhtml('&gt;&gt;');
 
         expect(xhtml).toEqual(withXHTMLBoilerplate('&gt;&gt;'));
+    });
+
+    it('should correctly serialize special characters in attributes', function () {
+        var xhtml = html2xhtml('<input value="&quot;&gt;&lt;&amp;&apos;"/>');
+
+        expect(xhtml).toEqual(withXHTMLBoilerplate('<input value="&quot;&gt;&lt;&amp;&apos;"/>'));
     });
 
     it('should serialize to self closing attribute', function () {
