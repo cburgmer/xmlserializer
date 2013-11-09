@@ -1,13 +1,7 @@
 Simple HTML5 to XHTML converter
 
-Package for the browser
------------------------
+Run tests and build for the browser
+-----------------------------------
 
-    $ npm install browserify
-    $ node ./node_modules/browserify/bin/cmd.js lib/web.js -o dist/html2xhtml.js
+    $ ./go
 
-Run tests
----------
-
-    $ npm install
-    $ ./node_modules/jasmine-node/bin/jasmine-node tests
