@@ -38,9 +38,15 @@ describe('html2xhtml', function () {
     });
 
     it('should correctly serialize special characters in comments', function () {
-        var xhtml = html2xhtml('<!-- --&gt; -->');
+        var xhtml = html2xhtml('<!-- &gt; -->');
 
-        expect(xhtml).toEqual('<!-- --&gt; -->' + emptyDocument());
+        expect(xhtml).toEqual('<!-- &gt; -->' + emptyDocument());
+    });
+
+    it('should quote dashes in comments', function () {
+        var xhtml = html2xhtml('<!--- -- - - ---- --->');
+
+        expect(xhtml).toEqual('<!--&#45; &#45;&#45; &#45; &#45; &#45;&#45;&#45;&#45; &#45;-->' + emptyDocument());
     });
 
     it('should serialize attributes', function () {
