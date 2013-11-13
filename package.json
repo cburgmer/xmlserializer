@@ -2,6 +2,7 @@
   "name": "xmlserializer.js",
   "description": "Serializes a document to XML/XHTML",
   "version": "0.1.0",
+  "repository": "http://github.com/cburgmer/xmlserializer.js",
   "author": "Christoph Burgmer",
   "keywords": [
     "html",

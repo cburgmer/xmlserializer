@@ -14,10 +14,7 @@ var getParser = function () {
         }
     },
     parser = getParser(),
-    serializer = getSerializer(),
-    html2xhtml = function (html) {
-        return serializer.serializeToString(parser.parse(html));
-    };
+    serializer = getSerializer();
 
 describe('xmlserializer.js', function () {
     var withXHTMLBoilerplate = function (body, head) {
