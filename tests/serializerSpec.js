@@ -1,8 +1,22 @@
-var Parser = require('parse5').Parser,
-    p = new Parser(),
-    serializeToString = require('../lib/serializer').serializeToString,
+var getParser = function () {
+        if (typeof require !== "undefined") {
+            var Parser = require('parse5').Parser;
+            return new Parser();
+        } else {
+            return window.parser;
+        }
+    },
+    getSerializer = function () {
+        if (typeof require !== "undefined") {
+            return require('../lib/serializer');
+        } else {
+            return window.xmlserializer;
+        }
+    },
+    parser = getParser(),
+    serializer = getSerializer(),
     html2xhtml = function (html) {
-        return serializeToString(p.parse(html));
+        return serializer.serializeToString(parser.parse(html));
     };
 
 describe('xmlserializer.js', function () {
@@ -37,21 +51,21 @@ describe('xmlserializer.js', function () {
     });
 
     it('should serialize comments', function () {
-        var xhtml = html2xhtml('<!-- this is a comment -->');
+        var xhtml = html2xhtml('<html><body><!-- this is a comment -->');
 
-        expect(xhtml).toEqual('<!-- this is a comment -->' + emptyDocument());
+        expect(xhtml).toEqual(withXHTMLBoilerplate('<!-- this is a comment -->'));
     });
 
     it('should correctly serialize special characters in comments', function () {
-        var xhtml = html2xhtml('<!-- &gt; -->');
+        var xhtml = html2xhtml('<html><body><!-- &gt; -->');
 
-        expect(xhtml).toEqual('<!-- &gt; -->' + emptyDocument());
+        expect(xhtml).toEqual(withXHTMLBoilerplate('<!-- &gt; -->'));
     });
 
     it('should quote dashes in comments', function () {
-        var xhtml = html2xhtml('<!--- -- - - ---- --->');
+        var xhtml = html2xhtml('<html><body><!--- -- - - ---- --->');
 
-        expect(xhtml).toEqual('<!--&#45; &#45;&#45; &#45; &#45; &#45;&#45;&#45;&#45; &#45;-->' + emptyDocument());
+        expect(xhtml).toEqual(withXHTMLBoilerplate('<!--&#45; &#45;&#45; &#45; &#45; &#45;&#45;&#45;&#45; &#45;-->'));
     });
 
     it('should serialize attributes', function () {

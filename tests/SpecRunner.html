@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jasmine Spec Runner</title>
+    <meta charset="utf-8"/>
+
+    <link rel="stylesheet" type="text/css" href="../node_modules/phantom-jasmine/vendor/jasmine-1.2.0/jasmine.css">
+    <script type="text/javascript" src="../node_modules/phantom-jasmine/vendor/jasmine-1.2.0/jasmine.js"></script>
+    <script type="text/javascript" src="../node_modules/phantom-jasmine/vendor/jasmine-1.2.0/jasmine-html.js"></script>
+
+    <script type="text/javascript" src="../dist/xmlserializer.js"></script>
+
+    <script type="text/javascript" src="../browser/parser.js"></script>
+    <script type="text/javascript" src="serializerSpec.js"></script>
+
+    <script type="text/javascript">
+        (function() {
+            var jasmineEnv = jasmine.getEnv();
+
+            var htmlReporter = new jasmine.HtmlReporter();
+            jasmineEnv.addReporter(htmlReporter);
+            jasmineEnv.specFilter = function(spec) {
+                return htmlReporter.specFilter(spec);
+            };
+
+
+            var currentWindowOnload = window.onload;
+            window.onload = function() {
+                if (currentWindowOnload) {
+                    currentWindowOnload();
+                }
+                jasmineEnv.execute();
+            };
+        })();
+    </script>
+</head>
+<body>
+</body>
+</html>
