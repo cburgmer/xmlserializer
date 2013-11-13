@@ -23,8 +23,10 @@ desc('Builds the browser bundle.');
 task('browser', function () {
     var b = browserify(),
         w = fs.createWriteStream('dist/xmlserializer.js');
-    b.add('./lib/web.js');
-    b.bundle().pipe(w);
+    b.add('./lib/serializer.js');
+    b.bundle({
+        standalone: 'xmlserializer'
+    }).pipe(w);
 });
 
 task('test', ['testNode', 'testBrowser']);
