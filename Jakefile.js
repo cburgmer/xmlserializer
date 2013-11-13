@@ -13,7 +13,7 @@ task('test', {async: true}, function () {
 desc('Builds the browser bundle.');
 task('browser', function () {
     var b = browserify(),
-        w = fs.createWriteStream('dist/html2xhtml.js');
+        w = fs.createWriteStream('dist/xmlserializer.js');
     b.add('./lib/web.js');
     b.bundle().pipe(w);
 });

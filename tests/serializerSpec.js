@@ -1,6 +1,11 @@
-var html2xhtml = require('../lib/converter').html2xhtml;
+var Parser = require('parse5').Parser,
+    p = new Parser(),
+    serializeToString = require('../lib/serializer').serializeToString,
+    html2xhtml = function (html) {
+        return serializeToString(p.parse(html));
+    };
 
-describe('html2xhtml', function () {
+describe('xmlserializer.js', function () {
     var withXHTMLBoilerplate = function (body, head) {
         var document = '<html xmlns="http://www.w3.org/1999/xhtml">';
         if (head) {

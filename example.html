@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <script type="text/javascript" src="dist/html2xhtml.js"></script>
+    <script type="text/javascript" src="dist/xmlserializer.js"></script>
 </head>
 <body>
     <textarea id="input" cols="80" rows="10" style="width: 600px; height: 250px"><p>An HTML document<br>with linebreaks<p>and more paragraphs.</textarea>
@@ -15,7 +15,7 @@
             oldText = input.value;
 
         function update() {
-            output.textContent = html2xhtml(input.value);
+            output.textContent = xmlserializer.serializeToString(parseHTML5(input.value));
         }
 
         input.onkeyup = function () {

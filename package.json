@@ -1,18 +1,17 @@
 {
-  "name": "html2xhtml",
-  "description": "HTML to XHTML converter",
-  "version": "0.1.1",
+  "name": "xmlserializer.js",
+  "description": "Serializes a document to XML/XHTML",
+  "version": "0.1.0",
   "author": "Christoph Burgmer",
   "keywords": [
     "html",
     "html5",
     "xhtml",
-    "converter"
+    "xml",
+    "serializer"
   ],
-  "main": "./lib/converter.js",
-  "dependencies": {
-    "parse5": "0.6.0"
-  },
+  "main": "./lib/serializer.js",
+  "dependencies": {},
   "devDependencies": {
     "jasmine-node": "1.11.0",
     "jake": "~0.7.3"
