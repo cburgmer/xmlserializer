@@ -8,7 +8,7 @@ var getParser = function () {
     },
     getSerializer = function () {
         if (typeof require !== "undefined") {
-            return require('../lib/serializer');
+            return require('../../lib/serializer');
         } else {
             return window.xmlserializer;
         }

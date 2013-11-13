@@ -6,7 +6,7 @@ desc('Runs the tests against node.');
 task('testNode', {async: true}, function () {
     console.log("Testing Node.js integration");
     jasmine.executeSpecsInFolder({
-        specFolders: ['tests'],
+        specFolders: ['tests/specs'],
         onComplete: complete
     });
 });
@@ -14,7 +14,7 @@ task('testNode', {async: true}, function () {
 desc('Runs the tests against a browser (PhantomJS).');
 task('testBrowser', {async: true}, ['browser'], function () {
     console.log("Testing browser integration");
-    jake.exec('phantomjs run-jasmine.js tests/SpecRunner.html', {printStdout: true}, function () {
+    jake.exec('phantomjs tests/run-jasmine.js tests/SpecRunner.html', {printStdout: true}, function () {
         complete();
     });
 });
