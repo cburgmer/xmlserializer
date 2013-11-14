@@ -21,10 +21,13 @@ For a browser based example run `./go` and see `example.html`.
 
 The same code for Node.js:
 
+    var xmlserializer = require('xmlserializer');
     var html2xhtml = function (htmlString) {
         var Parser = require('parse5').Parser,
             parser = new Parser(),
             dom = parser.parse(htmlString);
 
-        return serializer.serializeToString(dom);
+        return xmlserializer.serializeToString(dom);
     };
+    console.log(html2xhtml('<br>'));
+    // => <html xmlns="http://www.w3.org/1999/xhtml"><head/><body><br/></body></html>
