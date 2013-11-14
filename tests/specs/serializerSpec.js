@@ -16,7 +16,7 @@ var getParser = function () {
     parser = getParser(),
     serializer = getSerializer();
 
-describe('xmlserializer.js', function () {
+describe('xmlserializer', function () {
     var withXHTMLBoilerplate = function (body, head) {
         var document = '<html xmlns="http://www.w3.org/1999/xhtml">';
         if (head) {

@@ -1,16 +1,17 @@
 {
-  "name": "xmlserializer.js",
+  "name": "xmlserializer",
   "description": "Serializes a document to XML/XHTML",
   "version": "0.1.1",
-  "homepage": "http://cburgmer.github.io/xmlserializer.js/",
-  "repository": "http://github.com/cburgmer/xmlserializer.js",
+  "homepage": "http://cburgmer.github.io/xmlserializer/",
+  "repository": "http://github.com/cburgmer/xmlserializer",
   "author": "Christoph Burgmer",
   "keywords": [
     "html",
     "html5",
     "xhtml",
     "xml",
-    "serializer"
+    "serializer",
+    "XMLSerializer"
   ],
   "main": "./lib/serializer.js",
   "dependencies": {},
