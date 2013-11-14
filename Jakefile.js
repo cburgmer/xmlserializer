@@ -23,9 +23,11 @@ directory("dist");
 
 desc('Builds the browser bundle.');
 task('browser', ['dist'], function () {
-    console.log("Building browser bundle");
+    var target = 'dist/xmlserializer.js';
+    console.log("Building browser bundle in", target);
+
     var b = browserify(),
-        w = fs.createWriteStream('dist/xmlserializer.js');
+        w = fs.createWriteStream(target);
     b.add('./lib/serializer.js');
     b.bundle({
         standalone: 'xmlserializer'
