@@ -19,8 +19,10 @@ task('testBrowser', ['browser'], {async: true}, function () {
     });
 });
 
+directory("dist");
+
 desc('Builds the browser bundle.');
-task('browser', function () {
+task('browser', ['dist'], function () {
     console.log("Building browser bundle");
     var b = browserify(),
         w = fs.createWriteStream('dist/xmlserializer.js');
