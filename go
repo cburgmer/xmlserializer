@@ -1,12 +1,13 @@
 #!/bin/bash
 set -e
+PATH=$PATH:node_modules/.bin/
 
 installBuildDependencies() {
     npm install
 }
 
 build() {
-    node ./node_modules/jake/bin/cli.js "$@"
+    jake "$@"
 }
 
 main() {

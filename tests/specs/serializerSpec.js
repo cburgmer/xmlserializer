@@ -31,11 +31,11 @@ describe('xmlserializer.js', function () {
         }
         document += '</html>';
         return document;
-    }
+    };
 
     var emptyDocument = function () {
         return withXHTMLBoilerplate();
-    }
+    };
 
     it('should return a valid XHTML document for empty input', function() {
         var doc = parser.parse('');

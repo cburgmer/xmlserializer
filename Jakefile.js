@@ -2,6 +2,13 @@ var fs = require('fs'),
     jasmine = require('jasmine-node'),
     browserify = require('browserify');
 
+desc('Checks the syntax');
+task('jshint', {async: true}, function () {
+    jake.exec('jshint lib/*.js tests/specs/*.js tests/browserSpecs/*.js', {printStdout: true}, function () {
+        complete();
+    });
+});
+
 desc('Runs the tests against node.');
 task('testNode', {async: true}, function () {
     console.log("Testing Node.js integration");
@@ -34,6 +41,6 @@ task('browser', ['dist'], function () {
     }).pipe(w);
 });
 
-task('test', ['testNode', 'testBrowser']);
+task('test', ['jshint', 'testNode', 'testBrowser']);
 
 task('default', ['test', 'browser']);

@@ -17,7 +17,8 @@
     "parse5": "~0.6.0",
     "jasmine-node": "~1.11.0",
     "jake": "~0.7.3",
-    "browserify": "~2.35.1"
+    "browserify": "~2.35.1",
+    "jshint": "~2.3.0"
   },
   "licenses": [
     {
