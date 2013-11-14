@@ -12,7 +12,7 @@ task('testNode', {async: true}, function () {
 });
 
 desc('Runs the tests against a browser (PhantomJS).');
-task('testBrowser', {async: true}, ['browser'], function () {
+task('testBrowser', ['browser'], {async: true}, function () {
     console.log("Testing browser integration");
     jake.exec('phantomjs tests/run-jasmine.js tests/SpecRunner.html', {printStdout: true}, function () {
         complete();
@@ -21,6 +21,7 @@ task('testBrowser', {async: true}, ['browser'], function () {
 
 desc('Builds the browser bundle.');
 task('browser', function () {
+    console.log("Building browser bundle");
     var b = browserify(),
         w = fs.createWriteStream('dist/xmlserializer.js');
     b.add('./lib/serializer.js');
