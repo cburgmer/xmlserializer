@@ -134,9 +134,21 @@ describe('xmlserializer', function () {
     });
 
     it('should quote ASCII control characters in attributes', function () {
-        var doc = parser.parse('<input value="&#x1;&#x2;&#x3;&#x4;&#x5;&#x6;&#x7;&#x8;&#xb;&#xc;&#xe;&#xf;&#x10;&#x11;&#x12;&#x13;&#x14;&#x15;&#x16;&#x17;&#x18;&#x19;&#x1a;&#x1b;&#x1c;&#x1d;&#x1e;&#x1f;"/>');
+        var doc = parser.parse('<input value="&#x1;"/>');
 
-        expect(serializer.serializeToString(doc)).toEqual(withXHTMLBoilerplate('<input value="&#x1;&#x2;&#x3;&#x4;&#x5;&#x6;&#x7;&#x8;&#xb;&#xc;&#xe;&#xf;&#x10;&#x11;&#x12;&#x13;&#x14;&#x15;&#x16;&#x17;&#x18;&#x19;&#x1a;&#x1b;&#x1c;&#x1d;&#x1e;&#x1f;"/>'));
+        expect(serializer.serializeToString(doc)).toEqual(withXHTMLBoilerplate('<input value="&#x1;"/>'));
+    });
+
+    it('should quote ASCII control characters in script content', function () {
+        var doc = parser.parse('<script>\x01</script>');
+
+        expect(serializer.serializeToString(doc)).toEqual(withXHTMLBoilerplate('', '<script>&#x1;</script>'));
+    });
+
+    it('should quote ASCII control characters in style content', function () {
+        var doc = parser.parse('<style>\x01</style>');
+
+        expect(serializer.serializeToString(doc)).toEqual(withXHTMLBoilerplate('', '<style>&#x1;</style>'));
     });
 
     it('should serialize to self closing attribute', function () {
@@ -145,18 +157,18 @@ describe('xmlserializer', function () {
         expect(serializer.serializeToString(doc)).toEqual(withXHTMLBoilerplate('<br/>'));
     });
 
-    it('should put script content into CDATA blocks', function () {
+    it('should quote script content', function () {
         var doc = parser.parse('<script>var a = 1 & 1;</script>');
 
         expect(serializer.serializeToString(doc)).toEqual(withXHTMLBoilerplate('',
-            '<script><![CDATA[\nvar a = 1 & 1;\n]]></script>'));
+            '<script>var a = 1 &amp; 1;</script>'));
     });
 
-    it('should put script content into CDATA blocks', function () {
+    it('should quote style content', function () {
         var doc = parser.parse('<style>span:before { content: "<"; }</style>');
 
         expect(serializer.serializeToString(doc)).toEqual(withXHTMLBoilerplate('',
-            '<style><![CDATA[\nspan:before { content: "<"; }\n]]></style>'));
+            '<style>span:before { content: "&lt;"; }</style>'));
     });
 
     it('should convert boolean attributes', function () {
