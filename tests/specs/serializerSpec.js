@@ -115,12 +115,6 @@ describe('xmlserializer', function () {
         expect(serializer.serializeToString(doc)).toEqual(withXHTMLBoilerplate('&gt;&gt;'));
     });
 
-    it('should quote ASCII control characters', function () {
-        var doc = parser.parse('&#x1;&#x2;&#x3;&#x4;&#x5;&#x6;&#x7;&#x8;&#xb;&#xc;&#xe;&#xf;&#x10;&#x11;&#x12;&#x13;&#x14;&#x15;&#x16;&#x17;&#x18;&#x19;&#x1a;&#x1b;&#x1c;&#x1d;&#x1e;&#x1f;');
-
-        expect(serializer.serializeToString(doc)).toEqual(withXHTMLBoilerplate('&#x1;&#x2;&#x3;&#x4;&#x5;&#x6;&#x7;&#x8;&#xb;&#xc;&#xe;&#xf;&#x10;&#x11;&#x12;&#x13;&#x14;&#x15;&#x16;&#x17;&#x18;&#x19;&#x1a;&#x1b;&#x1c;&#x1d;&#x1e;&#x1f;'));
-    });
-
     it('should not quote tab, carriage return, line feed or space', function () {
         var doc = parser.parse('-&#x9;&#xa;&#xd; -');
 
@@ -131,24 +125,6 @@ describe('xmlserializer', function () {
         var doc = parser.parse('<input value="&quot;&gt;&lt;&amp;&apos;"/>');
 
         expect(serializer.serializeToString(doc)).toEqual(withXHTMLBoilerplate('<input value="&quot;&gt;&lt;&amp;&apos;"/>'));
-    });
-
-    it('should quote ASCII control characters in attributes', function () {
-        var doc = parser.parse('<input value="&#x1;"/>');
-
-        expect(serializer.serializeToString(doc)).toEqual(withXHTMLBoilerplate('<input value="&#x1;"/>'));
-    });
-
-    it('should quote ASCII control characters in script content', function () {
-        var doc = parser.parse('<script>\x01</script>');
-
-        expect(serializer.serializeToString(doc)).toEqual(withXHTMLBoilerplate('', '<script>&#x1;</script>'));
-    });
-
-    it('should quote ASCII control characters in style content', function () {
-        var doc = parser.parse('<style>\x01</style>');
-
-        expect(serializer.serializeToString(doc)).toEqual(withXHTMLBoilerplate('', '<style>&#x1;</style>'));
     });
 
     it('should serialize to self closing attribute', function () {
@@ -181,5 +157,38 @@ describe('xmlserializer', function () {
         var doc = parser.parse('<html xmlns="somenamespace"></html>');
 
         expect(serializer.serializeToString(doc)).toEqual('<html xmlns="somenamespace"><head/><body/></html>');
+    });
+
+    describe('invalid characters', function () {
+        it('should remove invalid ASCII control characters', function () {
+            var doc = parser.parse('-&#x1;&#x2;&#x3;&#x4;&#x5;&#x6;&#x7;&#x8;&#xb;&#xc;&#xe;&#xf;&#x10;&#x11;&#x12;&#x13;&#x14;&#x15;&#x16;&#x17;&#x18;&#x19;&#x1a;&#x1b;&#x1c;&#x1d;&#x1e;&#x1f;');
+
+            expect(serializer.serializeToString(doc)).toEqual(withXHTMLBoilerplate('-'));
+        });
+
+        it('should remove invalid characters from attributes', function () {
+            var doc = parser.parse('<input value="&#x1;"/>');
+
+            expect(serializer.serializeToString(doc)).toEqual(withXHTMLBoilerplate('<input value=""/>'));
+        });
+
+        it('should remove invalid characters from script content', function () {
+            var doc = parser.parse('<script>\x01</script>');
+
+            expect(serializer.serializeToString(doc)).toEqual(withXHTMLBoilerplate('', '<script></script>'));
+        });
+
+        it('should remove invalid characters from style content', function () {
+            var doc = parser.parse('<style>\x01</style>');
+
+            expect(serializer.serializeToString(doc)).toEqual(withXHTMLBoilerplate('', '<style></style>'));
+        });
+
+        it('should remove invalid characters from comments', function () {
+            var doc = parser.parse('<html><body><!--\x01-->');
+
+            expect(serializer.serializeToString(doc)).toEqual(withXHTMLBoilerplate('<!---->'));
+        });
+
     });
 });
