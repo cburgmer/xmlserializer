@@ -16,18 +16,26 @@ var getParser = function () {
     parser = getParser(),
     serializer = getSerializer();
 
+var serializerCollapsesHeadAndBody = (function () {
+    var xhtml = serializer.serializeToString(parser.parse(''));
+    return (/<head\/>/).test(xhtml);
+}());
+
 describe('xmlserializer', function () {
     var withXHTMLBoilerplate = function (body, head) {
         var document = '<html xmlns="http://www.w3.org/1999/xhtml">';
-        if (head) {
-            document += '<head>' + head + '</head>';
-        } else {
+        head = head || '';
+        body = body || '';
+
+        if (serializerCollapsesHeadAndBody && !head) {
             document += '<head/>';
-        }
-        if (body) {
-            document += '<body>' + body + '</body>';
         } else {
+            document += '<head>' + head + '</head>';
+        }
+        if (serializerCollapsesHeadAndBody && !body) {
             document += '<body/>';
+        } else {
+            document += '<body>' + body + '</body>';
         }
         document += '</html>';
         return document;
