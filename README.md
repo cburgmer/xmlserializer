@@ -26,7 +26,7 @@ See http://cburgmer.github.io/xmlserializer/
 Run tests and build for the browser
 -----------------------------------
 
-    $ ./go
+    $ npm install && npm test
 
 Example
 -------
