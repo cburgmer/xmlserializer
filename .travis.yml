@@ -5,7 +5,7 @@ deploy:
   provider: npm
   email: christoph.burgmer@gmail.com
   api_key:
-    secure: EsvyCKvVOxMZDU5yvIGiwpqWTGlHUWZtcFLTaXqdJB4PseJQpDoWohFL+aH/N3cc5DgxwtCTRunwQ1jesGsQb++AWMZ5TeWuYDQXvvU6vs5oGY7wChqb70Ksjbcyp4MIzyUEotfwt+PGlDKPEOb/S3wnBBRjF9m5fWfnS4RjVZQ=
+    secure: NmssJ5/Vu/sVY/F5VRtbMW1VLT1aQ1meF6B6aP6OgKfMO9Zmh1PxTySWYHwNTogypiq36QQoNbMZFiFJek+f2AzFYEEutr/gd2++Zm2gVBFb4LkdQMHPPK8mw8W//jHK7qNZeja7onH1wwD0pN7q0p/2L75+9ZfQNcZlJ6QTHTc=
   on:
     tags: true
     repo: cburgmer/xmlserializer
