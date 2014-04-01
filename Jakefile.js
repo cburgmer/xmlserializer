@@ -12,9 +12,8 @@ task('jshint', {async: true}, function () {
 desc('Runs the tests against node.');
 task('testNode', {async: true}, function () {
     console.log("Testing Node.js integration");
-    jasmine.executeSpecsInFolder({
-        specFolders: ['tests/specs'],
-        onComplete: complete
+    jake.exec('jasmine-node tests/specs/', {printStdout: true}, function () {
+        complete();
     });
 });
 
