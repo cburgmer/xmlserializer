@@ -87,10 +87,16 @@ describe('xmlserializer', function () {
         expect(serializer.serializeToString(doc)).toEqual(withXHTMLBoilerplate('<p> this is text</p>'));
     });
 
-    it('should serialize to lower case tag names', function () {
+    it('should serialize HTML to lower case tag names', function () {
         var doc = parser.parse('<P> </P>');
 
         expect(serializer.serializeToString(doc)).toEqual(withXHTMLBoilerplate('<p> </p>'));
+    });
+
+    it('should not change letter case in tag names for non HTML', function () {
+        var doc = parser.parse('<html><svg xmlns="http://www.w3.org/2000/svg"><defs><linearGradient/></defs></svg></html>');
+
+        expect(serializer.serializeToString(doc)).toEqual(withXHTMLBoilerplate('<svg xmlns="http://www.w3.org/2000/svg"><defs><linearGradient/></defs></svg>'));
     });
 
     it('should serialize to lower case attribute names', function () {
