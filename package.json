@@ -16,11 +16,11 @@
   "main": "./lib/serializer.js",
   "dependencies": {},
   "devDependencies": {
-    "parse5": "~0.6.0",
-    "jasmine-node": "~1.11.0",
+    "parse5": "~0.8.0",
+    "jasmine-node": "~1.14.0",
     "jake": "~0.7.3",
-    "browserify": "~2.35.1",
-    "jshint": "~2.3.0"
+    "browserify": "~3.38.0",
+    "jshint": "~2.4.0"
   },
   "licenses": [
     {
