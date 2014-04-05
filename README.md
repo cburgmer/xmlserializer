@@ -35,7 +35,7 @@ Run tests and build for the browser
 Example
 -------
 
-For a browser based example run `./go` and see `example.html`.
+For a browser based example run `npm test` and see `example.html`.
 
 The same code for Node.js:
 
