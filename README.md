@@ -1,6 +1,6 @@
 xmlserializer serializes a DOM subtree or DOM document into XML/XHTML.
 <a href="https://www.npmjs.org/package/xmlserializer">
-    <img src="https://badge.fury.io/js/xmlserializer.png"
+    <img src="https://badge.fury.io/js/xmlserializer.svg"
          align="right" alt="NPM version" />
 </a>
 
