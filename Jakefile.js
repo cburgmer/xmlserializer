@@ -1,5 +1,4 @@
 var fs = require('fs'),
-    jasmine = require('jasmine-node'),
     browserify = require('browserify');
 
 desc('Checks the syntax');
