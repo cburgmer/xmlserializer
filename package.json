@@ -28,6 +28,6 @@
     }
   ],
   "scripts": {
-    "test": "jake clean browser && jake test"
+    "test": "jake clean browser test"
   }
 }
