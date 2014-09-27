@@ -24,19 +24,30 @@ task('testBrowser', ['browser'], {async: true}, function () {
     });
 });
 
-directory("dist");
+var distDir = __dirname + '/dist',
+    browserBuildTarget = distDir + '/xmlserializer.js';
+
+directory(distDir);
 
 desc('Builds the browser bundle.');
-task('browser', ['dist'], function () {
-    var target = __dirname + '/dist/xmlserializer.js';
-    console.log("Building browser bundle in", target);
+task('browser', [distDir], function () {
+    console.log("Building browser bundle in", browserBuildTarget);
 
     var b = browserify(),
-        w = fs.createWriteStream(target);
+        w = fs.createWriteStream(browserBuildTarget);
     b.add('./lib/serializer.js');
     b.bundle({
         standalone: 'xmlserializer'
     }).pipe(w);
+});
+
+task('clean', function () {
+    if (fs.existsSync(browserBuildTarget)) {
+        fs.unlinkSync(browserBuildTarget);
+    }
+    if (fs.existsSync(distDir)) {
+        fs.rmdirSync(distDir);
+    }
 });
 
 task('test', ['jshint', 'testNode', 'testBrowser']);

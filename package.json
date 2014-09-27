@@ -28,6 +28,6 @@
     }
   ],
   "scripts": {
-    "test": "jake test"
+    "test": "jake clean test"
   }
 }
