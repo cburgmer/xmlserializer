@@ -11,7 +11,7 @@ task('jshint', {async: true}, function () {
 desc('Runs the tests against node.');
 task('testNode', {async: true}, function () {
     console.log("Testing Node.js integration");
-    jake.exec('jasmine-node tests/specs/', {printStdout: true}, function () {
+    jake.exec('jasmine-node --captureExceptions tests/specs/', {printStdout: true}, function () {
         complete();
     });
 });
@@ -19,17 +19,15 @@ task('testNode', {async: true}, function () {
 desc('Runs the tests against a browser (PhantomJS).');
 task('testBrowser', ['browser'], {async: true}, function () {
     console.log("Testing browser integration");
-    jake.exec('ls dist/xmlserializer.js', {printStdout: true}, function () {
-        jake.exec('phantomjs tests/run-jasmine.js tests/SpecRunner.html', {printStdout: true}, function () {
-            complete();
-        });
+    jake.exec('phantomjs tests/run-jasmine.js tests/SpecRunner.html', {printStdout: true}, function () {
+        complete();
     });
 });
 
 directory("dist");
 
 desc('Builds the browser bundle.');
-task('browser', ['dist'], function () {
+task('browser', [], function () {
     var target = 'dist/xmlserializer.js';
     console.log("Building browser bundle in", target);
 

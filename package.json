@@ -28,6 +28,6 @@
     }
   ],
   "scripts": {
-    "test": "jake test"
+    "test": "jake browser && cat dist/xmlserializer.js && jake test"
   }
 }
