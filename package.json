@@ -28,6 +28,6 @@
     }
   ],
   "scripts": {
-    "test": "pwd && jake browser && ls && cat dist/xmlserializer.js ; sleep 10 ; jake test"
+    "test": "jake test"
   }
 }
