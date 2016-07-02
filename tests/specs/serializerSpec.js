@@ -173,6 +173,14 @@ describe('xmlserializer', function () {
         expect(serializer.serializeToString(doc)).toEqual('<html xmlns="somenamespace"><head/><body/></html>');
     });
 
+    it('should serialize any element', function () {
+        var doc = parser.parse('<div>a div</div>'),
+            htmlNode = doc.childNodes[doc.childNodes.length - 1],
+            div = htmlNode.childNodes[1].childNodes[0];
+
+        expect(serializer.serializeToString(div)).toEqual('<div xmlns="http://www.w3.org/1999/xhtml">a div</div>');
+    });
+
     describe('invalid characters', function () {
         it('should remove invalid ASCII control characters', function () {
             var doc = parser.parse('-&#x1;&#x2;&#x3;&#x4;&#x5;&#x6;&#x7;&#x8;&#xb;&#xc;&#xe;&#xf;&#x10;&#x11;&#x12;&#x13;&#x14;&#x15;&#x16;&#x17;&#x18;&#x19;&#x1a;&#x1b;&#x1c;&#x1d;&#x1e;&#x1f;');
