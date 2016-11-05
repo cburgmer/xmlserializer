@@ -1,7 +1,6 @@
 var getParser = function () {
         if (typeof require !== "undefined") {
-            var Parser = require('parse5').Parser;
-            return new Parser();
+            return require('parse5');
         } else {
             return window.parser;
         }

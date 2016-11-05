@@ -17,8 +17,8 @@
   "dependencies": {},
   "devDependencies": {
     "jasmine-node": "~1.14.0",
-    "jshint": "~2.4.0",
-    "parse5": "~0.8.0",
+    "jshint": "^2.9.4",
+    "parse5": "^2.2.3",
     "phantomjs-prebuilt": "^2.1.13"
   },
   "licenses": [
