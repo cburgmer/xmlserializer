@@ -19,7 +19,6 @@
     "parse5": "~0.8.0",
     "jasmine-node": "~1.14.0",
     "jake": "~0.7.3",
-    "browserify": "~3.38.0",
     "jshint": "~2.4.0"
   },
   "licenses": [
@@ -28,6 +27,6 @@
     }
   ],
   "scripts": {
-    "test": "jake clean browser test"
+    "test": "jake test"
   }
 }
