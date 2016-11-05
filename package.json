@@ -22,11 +22,7 @@
     "parse5": "^2.2.3",
     "phantomjs-prebuilt": "^2.1.13"
   },
-  "licenses": [
-    {
-      "type": "MIT"
-    }
-  ],
+  "license": "MIT",
   "scripts": {
     "jshint": "jshint xmlserializer.js tests/specs/*.js tests/browserSpecs/*.js",
     "jasmine-node": "jasmine-node --captureExceptions tests/specs/",
