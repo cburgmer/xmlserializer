@@ -16,9 +16,10 @@
   "main": "./lib/serializer.js",
   "dependencies": {},
   "devDependencies": {
-    "parse5": "~0.8.0",
     "jasmine-node": "~1.14.0",
-    "jshint": "~2.4.0"
+    "jshint": "~2.4.0",
+    "parse5": "~0.8.0",
+    "phantomjs-prebuilt": "^2.1.13"
   },
   "licenses": [
     {
