@@ -18,7 +18,6 @@
   "devDependencies": {
     "parse5": "~0.8.0",
     "jasmine-node": "~1.14.0",
-    "jake": "~0.7.3",
     "jshint": "~2.4.0"
   },
   "licenses": [
@@ -27,6 +26,9 @@
     }
   ],
   "scripts": {
-    "test": "jake test"
+    "jshint": "jshint lib/*.js tests/specs/*.js tests/browserSpecs/*.js",
+    "jasmine-node": "jasmine-node --captureExceptions tests/specs/",
+    "jasmine-browser": "phantomjs tests/run-jasmine.js tests/SpecRunner.html",
+    "test": "npm run jshint && npm run jasmine-node && npm run jasmine-browser"
   }
 }
