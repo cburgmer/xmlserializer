@@ -16,6 +16,7 @@
   "main": "./lib/serializer.js",
   "dependencies": {},
   "devDependencies": {
+    "jasmine-core": "^2.5.2",
     "jasmine-node": "~1.14.0",
     "jshint": "^2.9.4",
     "parse5": "^2.2.3",
