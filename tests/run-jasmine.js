@@ -56,7 +56,7 @@ page.open(system.args[1], function(status){
     } else {
         waitFor(function(){
             return page.evaluate(function(){
-                return document.body.querySelector('.symbolSummary .pending') === null
+                return document.body.querySelector('.jasmine-suite-detail') !== null;
             });
         }, function(){
             var exitCode = page.evaluate(function(){
