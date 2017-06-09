@@ -42,8 +42,7 @@ The same code for Node.js:
 ```js
 var xmlserializer = require('xmlserializer');
 var html2xhtml = function (htmlString) {
-    var Parser = require('parse5').Parser,
-        parser = new Parser(),
+    var parser = require('parse5'),
         dom = parser.parse(htmlString);
 
     return xmlserializer.serializeToString(dom);
