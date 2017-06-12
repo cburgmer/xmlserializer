@@ -172,6 +172,27 @@ describe('xmlserializer', function () {
         expect(serializer.serializeToString(doc)).toEqual('<html xmlns="somenamespace"><head/><body/></html>');
     });
 
+    it('should serialize namespaces correctly in svg', function() {
+        var svgString =
+            '<svg id="svgContainer" version="1.1" ' +
+                  'xmlns="http://www.w3.org/2000/svg" ' +
+                  'xmlns:cn="http://www.custom-namespace.com/cn" '+
+                  'xmlns:xlink="http://www.w3.org/1999/xlink"> ' +
+              '<rect id="rect-background" ' +
+                     'width="3006" height="4187" ' +
+                     'style="fill:#ffffff; fill-opacity:1; stroke:none;"/> ' +
+              '<svg id="img-wrapper" ' +
+                    'cn:attribute_one="true" cn:attribute-two="cut"> '+
+                '<image id="img" xlink:href="/foo/bar.jpg" ' +
+                        'width="5449" height="4087"/> ' +
+              '</svg>' +
+            '</svg>';
+
+        var doc = parser.parse(svgString);
+        expect(serializer.serializeToString(doc))
+            .toEqual(withXHTMLBoilerplate(svgString));
+    });
+
     it('should serialize any element', function () {
         var doc = parser.parse('<div>a div</div>'),
             htmlNode = doc.childNodes[doc.childNodes.length - 1],
