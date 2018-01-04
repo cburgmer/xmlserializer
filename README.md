@@ -23,7 +23,7 @@ This behaviour might become optional in the future.
 Demo
 ----
 
-See http://cburgmer.github.io/xmlserializer/
+See https://runkit.com/embed/siinwcyjdcjw
 
 Run tests and build for the browser
 -----------------------------------
