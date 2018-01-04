@@ -1,7 +1,7 @@
 {
   "name": "xmlserializer",
   "description": "Serializes a document to XML/XHTML",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "repository": "http://github.com/cburgmer/xmlserializer",
   "author": "Christoph Burgmer",
   "keywords": [
