@@ -60,9 +60,9 @@
         // Serialize the namespace as an xmlns attribute whenever the element
         // doesn't already have one and the inherited namespace does not match
         // the element's namespace.
-        if (!nodeHasXmlnsAttr
-            && (isRootNode || node.namespaceURI !== node.parentNode.namespaceURI)
-            && node.namespaceURI !== null
+        if (!nodeHasXmlnsAttr &&
+            (isRootNode || node.namespaceURI !== node.parentNode.namespaceURI) &&
+            node.namespaceURI !== null
         ) {
             return ' ' + nodePrefix + '="' + node.namespaceURI + '"';
         }
