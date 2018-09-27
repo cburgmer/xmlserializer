@@ -217,6 +217,12 @@ describe('xmlserializer', function () {
 
             expect(serializer.serializeToString(parsedXml)).toMatch('prefixed:element');
         });
+        it('should prefix a short tag namespace', function () {
+            var xmlString = '<prefixed:element/>';
+            var parsedXml = parser.parse(xmlString, 'text/xml');
+
+            expect(serializer.serializeToString(parsedXml)).toMatch('<prefixed:element/>');
+        });
         it('should leave missing namespace un-prefixed', function () {
             var xmlString = '<element><elem></elem></element>';
             var parsedXml = parser.parse(xmlString, 'text/xml');
