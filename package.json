@@ -15,8 +15,8 @@
   "main": "./xmlserializer.js",
   "dependencies": {},
   "devDependencies": {
+    "jasmine": "^3.3.1",
     "jasmine-core": "^2.5.2",
-    "jasmine-node": "^2.0.1",
     "jshint": "^2.9.6",
     "parse5": "^2.2.3",
     "phantomjs-prebuilt": "^2.1.16"
@@ -24,7 +24,7 @@
   "license": "MIT",
   "scripts": {
     "jshint": "jshint xmlserializer.js tests/specs/*.js tests/browserSpecs/*.js",
-    "jasmine-node": "jasmine-node --captureExceptions tests/specs/",
+    "jasmine-node": "jasmine 'tests/specs/**/*'",
     "jasmine-browser": "phantomjs tests/run-jasmine.js tests/SpecRunner.html",
     "test": "npm run jshint && npm run jasmine-node && npm run jasmine-browser"
   }
