@@ -1,16 +1,14 @@
 var getParser = function () {
         if (typeof require !== "undefined") {
             return require('parse5');
-        } else {
-            return window.parser;
         }
+        return window.parser;
     },
     getSerializer = function () {
         if (typeof require !== "undefined") {
             return require('../../xmlserializer');
-        } else {
-            return window.xmlserializer;
         }
+        return window.xmlserializer;
     },
     parser = getParser(),
     serializer = getSerializer();
@@ -210,6 +208,39 @@ describe('xmlserializer', function () {
 
             expect(serializer.serializeToString(doc)).toEqual(withXHTMLBoilerplate('<!---->'));
         });
+    });
 
+    describe('xml namespace serialization', function () {
+        it('should prefix a namespace', function () {
+            var xmlString = '<prefixed:element><elem></elem></prefixed:element>';
+            var parsedXml = parser.parse(xmlString, 'text/xml');
+
+            expect(serializer.serializeToString(parsedXml)).toMatch('prefixed:element');
+        });
+        it('should prefix a short tag namespace', function () {
+            var xmlString = '<prefixed:element/>';
+            var parsedXml = parser.parse(xmlString, 'text/xml');
+
+            expect(serializer.serializeToString(parsedXml)).toMatch('<prefixed:element/>');
+        });
+        it('should leave missing namespace un-prefixed', function () {
+            var xmlString = '<element><elem></elem></element>';
+            var parsedXml = parser.parse(xmlString, 'text/xml');
+
+            expect(serializer.serializeToString(parsedXml)).toMatch('<element>');
+        });
+
+        it('should prefix attribute', function () {
+            var xmlString = '<xml prefixed:attribute="value"><body></body></xml>';
+            var parsedXml = parser.parse(xmlString);
+
+            expect(serializer.serializeToString(parsedXml)).toMatch('prefixed:attribute="value"');
+        });
+        it('should leave missing prefix attribute un-prefixed', function () {
+            var xmlString = '<xml attribute="value"><body></body></xml>';
+            var parsedXml = parser.parse(xmlString);
+
+            expect(serializer.serializeToString(parsedXml)).toMatch('xml attribute="value"');
+        });
     });
 });

@@ -46,20 +46,28 @@
     };
 
     var serializeNamespace = function (node, isRootNode) {
+        var nodePrefixes = node.nodeName.match(/(.*):/);
+
+        var nodePrefix = 'xmlns';
+        if (null !== nodePrefixes && nodePrefixes.length > 0) {
+            nodePrefix = 'xmlns:' + nodePrefixes[1];
+        }
+
         var nodeHasXmlnsAttr = Array.prototype.map.call(node.attributes || node.attrs, function (attr) {
             return attr.name;
-        })
-                .indexOf('xmlns') >= 0;
+        }).indexOf(nodePrefix) >= 0;
+
         // Serialize the namespace as an xmlns attribute whenever the element
         // doesn't already have one and the inherited namespace does not match
         // the element's namespace.
         if (!nodeHasXmlnsAttr &&
-            (isRootNode ||
-             node.namespaceURI !== node.parentNode.namespaceURI)) {
-            return ' xmlns="' + node.namespaceURI + '"';
-        } else {
-            return '';
+            (isRootNode || node.namespaceURI !== node.parentNode.namespaceURI) &&
+            node.namespaceURI !== null
+        ) {
+            return ' ' + nodePrefix + '="' + node.namespaceURI + '"';
         }
+
+        return '';
     };
 
     var serializeChildren = function (node) {
