@@ -8,6 +8,25 @@
     }
 }(this, function () {
 
+    var namespaces = {};
+
+    var collectNamespaces = function(node) {
+      var attributes = node.attrs || node.attributes;
+      if (attributes) {
+        for (var i = 0; i < attributes.length; i++) {
+          var attr = attributes[i];
+          if (attr.name.indexOf('xmlns') === 0) {
+            var prefix = attr.name.split(':')[1];
+            var value = attr.value;
+            namespaces[value] = prefix;
+          }
+          if (attr.prefix) {
+            namespaces[attr.namespace] = attr.prefix;
+          }
+        }
+      }
+    };
+
     var removeInvalidCharacters = function (content) {
         // See http://www.w3.org/TR/xml/#NT-Char for valid XML 1.0 characters
         return content.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g, '');
@@ -30,9 +49,14 @@
     };
 
     var serializeAttribute = function (attr) {
-        var value = attr.value;
+        var prefix = ' ';
+        var value = serializeAttributeValue(attr.value);
 
-        return ' ' + attr.name + '="' + serializeAttributeValue(value) + '"';
+        if (attr.name.indexOf(':') === -1 &&
+            attr.namespaceURI && namespaces[attr.namespaceURI]) {
+          prefix = ' ' + namespaces[attr.namespaceURI] + ':';
+        }
+        return prefix + attr.name + '="' + value + '"';
     };
 
     var getTagName = function (node) {
@@ -47,6 +71,9 @@
 
     var serializeNamespace = function (node, isRootNode) {
         var nodeHasXmlnsAttr = Array.prototype.map.call(node.attributes || node.attrs, function (attr) {
+            if (attr.prefix) {
+              attr.name = attr.prefix + ':' + attr.name;
+            }
             return attr.name;
         })
                 .indexOf('xmlns') >= 0;
@@ -104,6 +131,7 @@
 
     var nodeTreeToXHTML = function (node, options) {
         var isRootNode = options && options.rootNode;
+        collectNamespaces(node);
 
         if (node.nodeName === '#document' ||
             node.nodeName === '#document-fragment') {
@@ -123,6 +151,7 @@
 
     return {
         serializeToString: function (node) {
+            namespaces = {};
             return removeInvalidCharacters(nodeTreeToXHTML(node, {rootNode: true}));
         }
     };
